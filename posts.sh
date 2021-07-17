@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+cd "$(dirname "$0")"
+
 :>counts
 while IFS= read -r USER; do
 	2>/dev/null curl "https://www.speedrun.com/user/$USER/info" |
@@ -20,6 +22,6 @@ sort -nr counts | awk '
 ' >posts
 
 sed "
-s/<!-- LAST UPDATED -->/$(date "+%d %B %Y, %T")/
+s/<!-- LAST UPDATED -->/$(date "+%d %B %Y, %T") UTC/
 /<!-- POST DATA -->/r posts
 " template.html >index.html
