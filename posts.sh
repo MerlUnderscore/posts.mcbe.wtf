@@ -2,12 +2,17 @@
 
 cd "$(dirname "$0")"
 
+# Incase there are any new users found, this avoids I need to keep manually pulling on my pi.
+git pull
+
+# Get all the forum post counts.
 :>counts
 while IFS= read -r USER; do
 	2>/dev/null curl "https://www.speedrun.com/user/$USER/info" |
 		sed -n 's|.*<p><strong>Posts:</strong> \([0-9]*\)</p>.*|\1 '$USER'|p' >>counts
 done <users
 
+# Sort them and get the ranking numbers, taking ties into account.
 sort -nr counts | awk '
 {
 	if ($1 == prev)
@@ -21,6 +26,7 @@ sort -nr counts | awk '
 }
 ' >posts
 
+# Create the index file.
 sed "
 s/<!-- LAST UPDATED -->/$(date "+%d %B %Y, %T") UTC/
 /<!-- POST DATA -->/r posts
