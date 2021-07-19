@@ -29,5 +29,8 @@ sort -nr counts | awk '
 # Create the index file.
 sed "
 s/<!-- LAST UPDATED -->/$(date "+%d %B %Y, %T") UTC/
-/<!-- POST DATA -->/r posts
+/<!-- POST DATA -->/ {
+	r posts
+	d
+}
 " template.html >index.html
