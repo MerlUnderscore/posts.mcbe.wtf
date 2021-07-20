@@ -27,10 +27,14 @@ sort -nr counts | awk '
 ' >posts
 
 # Create the index file.
-sed "
-s/<!-- LAST UPDATED -->/$(date "+%d %B %Y, %T") UTC/
+sed '
+# Perform HTML minification
+s/^[\t ]*//
+
+# Update the data
+s/<!-- LAST UPDATED -->/'"$(date "+%d %B %Y, %T UTC")"'/
 /<!-- POST DATA -->/ {
 	r posts
 	d
 }
-" template.html >index.html
+' template.html | tr -d '\n' >index.html
