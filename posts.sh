@@ -38,3 +38,22 @@ s/<!-- LAST UPDATED -->/'"$(date "+%d %B %Y, %T UTC")"'/
 	d
 }
 ' template.html | tr -d '\n' >index.html
+
+# Perform CSS minification
+sed '
+y/\t/ /
+
+s/ *$//
+s/^ *//
+s/  */ /g
+
+s/: */:/
+s/ *;/;/
+
+/{$/ {
+	s/ *{$/{/
+	s/, */,/g
+	s/^@media */@media/
+}
+
+' template.css | tr -d '\n' >style.css
