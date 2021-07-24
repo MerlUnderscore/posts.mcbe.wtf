@@ -1,16 +1,12 @@
 # Script to get the players ranks and posts per day
 
-{	if ($1 == prev)
+{	if ((page == "total" && $1 == prev) || (page == "ppd" && $2 == prev))
 		pos = prev_nr
 	else
 		pos = NR
 
-	cmd = "echo \"scale = 2; "$1" / (($(date \"+%s\") - $(date -d \""$2"\" \"+%s\")) / 86400)\" | bc"
-	(cmd | getline ppd)
-	ppd = sprintf("%.2f", ppd)
-	print "<tr><td>"pos"</td><td>"$3"</td><td>"$1"</td><td>"ppd"</td></tr>"
-	close(cmd)
+	print "<tr><td>"pos"</td><td>"$3"</td><td>"$1"</td><td>"$2"</td></tr>"
 
-	prev = $1
+	prev = (page == "total") ? $1 : $2
 	prev_nr = pos
 }

@@ -17,6 +17,10 @@ body {
 	font-family: 'Lato', sans-serif;
 }
 
+a {
+	color: #72bcd4;
+}
+
 p {
 	text-align: center;
 	margin: 20px 0 60px;
@@ -120,4 +124,8 @@ tfoot th {
 	tfoot th {
 		display: table-cell;
 	}
+}
+
+.links {
+	text-align: center;
 }

@@ -10,11 +10,16 @@ s/^[[:space:]]*//
 	h
 }
 
-# Append the saved sign up to the pattern space and print it
 /Posts:/ {
+	# Get the number of posts and append the signup date to it from the hold space
 	s/.*Posts:[^0-9]*\([0-9]*\).*/\1/
 	G
 	y/\n/ /
+	# Calculate the posts per day and output everything in the format
+	# <posts> <posts per day>
+	s/\([^ ]*\) \(.*\)/printf "\1 "; echo "scale = 2; \1 \/ (($(date "+%s") - $(date -d "\2" "+%s")) \/ 86400)" | bc/
+	e
+	s/ \./ 0./
 	p
 	q
 }
