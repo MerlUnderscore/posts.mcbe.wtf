@@ -5,7 +5,7 @@
 # On my system I have multiple sed(1) implementations installed
 SED="/usr/bin/sed"
 
-cd "$(dirname "$0")"
+cd "${0%/*}"
 
 # Incase there are any new users found, this avoids I need to keep manually pulling on my pi.
 git pull
