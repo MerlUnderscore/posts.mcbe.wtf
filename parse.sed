@@ -17,9 +17,8 @@ s/^[[:space:]]*//
 	y/\n/ /
 	# Calculate the posts per day and output everything in the format
 	# <posts> <posts per day>
-	s/\([^ ]*\) \(.*\)/printf "\1 "; echo "scale = 2; \1 \/ (($(date "+%s") - $(date -d "\2" "+%s")) \/ 86400)" | bc/
+	s/\([^ ]*\) \(.*\)/echo "scale = 2; \1 \/ (($(date "+%s") - $(date -d "\2" "+%s")) \/ 86400)" | bc | xargs printf "\1 %.2f"/
 	e
-	s/ \./ 0./
 	p
 	q
 }
