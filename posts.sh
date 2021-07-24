@@ -8,8 +8,7 @@ SED="/usr/bin/sed"
 cd "$(dirname "$0")"
 
 # Incase there are any new users found, this avoids I need to keep manually pulling on my pi.
-# XXX
-#git pull
+git pull
 
 # Get all the forum post counts.
 :>counts
