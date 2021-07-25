@@ -9,7 +9,4 @@ The static site generator makes use of `awk(1)`, `curl(1)`, `GNU sed(1)` to webs
 page, get their account age and total forum posts, and create the webpages. Most of the process is
 powered by `sed` though.
 
-If you would like to use `ssed(1)` instead of `GNU sed(1)`, make sure to change the path to `sed`
-used in `posts.sh` and in `create-html.sed` make sure to swap out the `z` command for `s/.*//`.
-
 The site can be found at https://posts.mcbe.wtf

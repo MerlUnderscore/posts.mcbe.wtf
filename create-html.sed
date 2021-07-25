@@ -5,8 +5,7 @@
 # for later.
 1 {
 	h
-	z	# Autoprint is enabled so zap the pattern space before 'n'
-	n
+	d
 }
 
 # Perform HTML minification.
@@ -27,10 +26,7 @@ s/^[[:space:]]*//
 }
 
 # Update the modification date
-/<!-- LAST UPDATED -->/ {
-	s/\(.*\)<!-- LAST UPDATED -->\(.*\)/date "+\1%d %B %Y, %T UTC\2"/
-	e
-}
+s/\(.*\)<!-- LAST UPDATED -->\(.*\)/date "+\1%d %B %Y, %T UTC\2"/e
 
 # Read the stored metadata from the hold space into the pattern space and create the appropriate
 # table.
